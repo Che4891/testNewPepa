@@ -1,16 +1,12 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:env_flutter/env_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/theme/app_colors.dart';
 import 'package:flutter_application_1/widgets/auht_footer.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AuthWidget extends StatelessWidget {
   const AuthWidget({super.key});
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +40,7 @@ class AuthWidget extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      color: Colors.white,
+                      color: AppColors.whiteColor,
                       boxShadow: [
                         BoxShadow(
                           color:
@@ -56,10 +52,7 @@ class AuthWidget extends StatelessWidget {
                       ]),
                 ),
               ),
-              Flexible(
-                fit: FlexFit.loose,
-                child: AuthFooter()
-              )
+              Flexible(fit: FlexFit.loose, child: AuthFooter())
             ]),
       ),
     );
@@ -67,83 +60,124 @@ class AuthWidget extends StatelessWidget {
 }
 
 class _LoginFormWidget extends StatefulWidget {
-  const _LoginFormWidget({super.key});
+  const _LoginFormWidget({Key? key,});
 
   @override
   State<_LoginFormWidget> createState() => _FormWidgetState();
 }
 
 class _FormWidgetState extends State<_LoginFormWidget> {
+  final _formKey = GlobalKey<FormState>();
+  final _loginTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
+
+
+
+  void _auth() {
+        final isValidForm = _formKey.currentState!.validate();
+        if (isValidForm) {
+          print("all ok");
+        }
+  }
+
+  void _resetPass() {
+  }
+
   @override
   Widget build(BuildContext context) {
-    void _getEnv () async {
-      await dotenv.load();
-
-  String foo = dotenv.get('ESCAPED_DOLLAR_SIGN');
-  print(foo);
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Anmelden',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        TextFormField(
-          style: TextStyle(fontSize: 16),
-          decoration: InputDecoration(
-            labelText: 'E-Mail-Adresse*',
-          ),
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        TextFormField(
-          style: TextStyle(fontSize: 16),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter some text';
-            }
-            return null;
-          },
-          obscureText: true,
-          decoration: InputDecoration(
-            labelText: 'Passwort*',
-          ),
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                'Passwort vergessen?',
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            minimumSize: const Size.fromHeight(38),
-          ),
-          onPressed: _getEnv,
-          child: const Text(
+    return Form(
+      key: _formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
             'Anmelden',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
           ),
-        ),
-      ],
+          const SizedBox(
+            height: 20,
+          ),
+          TextFormField(
+            controller: _loginTextController,
+            style: TextStyle(fontSize: 16),
+
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'E-Mail-Adresse ist erforderlich';
+              }
+              if (!RegExp(
+                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                  .hasMatch(value)) {
+                return 'E-Mail-Adresse muss gültig sein';
+              }
+              return null;
+            },
+            decoration: const InputDecoration(
+              errorStyle: TextStyle(
+                height: 1,
+              ),
+              labelText: 'E-Mail-Adresse*',
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          TextFormField(
+            controller: _passwordTextController,
+            style: TextStyle(fontSize: 16),
+            obscureText: true,
+            validator:(value) {
+              if (value!.isEmpty) {
+                return 'Passwort wird benötigt';
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+              labelText: 'Passwort*',
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: _resetPass,
+                child: const Text(
+                  'Passwort vergessen?',
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size.fromHeight(38),
+            ),
+            onPressed: _auth,
+            child: const Text(
+              'Anmelden',
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
 
 
 
+//   String? get _errorText {
+//   final text = _loginTextController.text;
+//   if (text.isEmpty) {
+//     return 'Can\'t be empty';
+//   }
+//   if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+//     .hasMatch(text)) {
+//     return 'Too short';
+//   }  return null;
+// }
