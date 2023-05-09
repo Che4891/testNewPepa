@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_application_1">
+    package="com.example.sales_power">
     <queries>
   <!-- If your app checks for SMS support -->
   <intent>
@@ -13,9 +13,9 @@
   </intent>
 </queries>
    <application
-        android:label="flutter_application_1"
+        android:label="SalesPower"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

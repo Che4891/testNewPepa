@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/theme/app_colors.dart';
-import 'package:flutter_application_1/widgets/auht_footer.dart';
+import 'package:sales_power/theme/app_colors.dart';
+import 'package:sales_power/widgets/auht_footer.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AuthWidget extends StatelessWidget {
@@ -75,8 +75,9 @@ class _FormWidgetState extends State<_LoginFormWidget> {
 
   void _auth() {
         final isValidForm = _formKey.currentState!.validate();
+       
         if (isValidForm) {
-          print("all ok");
+         Navigator.of(context).pushReplacementNamed('/main');
         }
   }
 
@@ -169,15 +170,3 @@ class _FormWidgetState extends State<_LoginFormWidget> {
   }
 }
 
-
-
-//   String? get _errorText {
-//   final text = _loginTextController.text;
-//   if (text.isEmpty) {
-//     return 'Can\'t be empty';
-//   }
-//   if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-//     .hasMatch(text)) {
-//     return 'Too short';
-//   }  return null;
-// }

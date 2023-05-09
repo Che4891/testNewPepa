@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/theme/app_colors.dart';
-import 'package:flutter_application_1/theme/app_ui_style.dart';
-import 'package:flutter_application_1/widgets/auth_widget.dart';
+import 'package:sales_power/theme/app_colors.dart';
+import 'package:sales_power/theme/app_ui_style.dart';
+import 'package:sales_power/widgets/auth_widget.dart';
+import 'package:sales_power/widgets/main_widget.dart';
 
 void main() {
   runApp(MyFirstApp());
@@ -13,7 +14,12 @@ class MyFirstApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'SalesPower',
+      title: 'sales_power',
+      routes: {
+        '/main': (context) => const MainWidget(),
+        '/auth': (context) => const AuthWidget(),
+      },
+      initialRoute: '/main',
       theme: ThemeData(
         fontFamily: 'Roboto',
         primaryColor: AppColors.mainColor,
@@ -26,10 +32,13 @@ class MyFirstApp extends StatelessWidget {
         inputDecorationTheme: AppInputStyle.inputStyle,
         textButtonTheme: AppButtonStyle.textButton,
         elevatedButtonTheme: AppButtonStyle.classicButton,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: AppColors.mainColor,
+          unselectedItemColor: AppColors.whiteColor,
+          selectedItemColor: AppColors.selectGrey,
+
+        )
       ),
-      home: AuthWidget(),
     );
   }
 }
-
-

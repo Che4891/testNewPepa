@@ -3,5 +3,6 @@
     "cSpell.words": [
         "cupertino",
         "Roboto"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

@@ -7,4 +7,5 @@ abstract class AppColors {
   static Color alertColor = Color.fromRGBO(232, 72, 101, 1);
   static Color darkGreyColor = Color.fromRGBO(143, 173, 191, 1);
   static Color whiteColor = Color.fromARGB(255, 255, 255, 255);
+  static Color selectGrey = Color.fromARGB(255, 156, 181, 198);
 }

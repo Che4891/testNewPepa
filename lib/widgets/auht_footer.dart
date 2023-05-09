@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_application_1/theme/app_colors.dart';
+import 'package:sales_power/theme/app_colors.dart';
 
 class AuthFooter extends StatelessWidget {
   const AuthFooter({super.key});
 
   _aboutCompany() async {
-    final Uri _companyUrl = Uri.parse('https://www.salespower.io/impressum');
+    final Uri _companyUrl = Uri.parse('https://www.sales_power.io/impressum');
     if (!await launchUrl(_companyUrl)) {
       throw Exception('Could not launch $_companyUrl');
     }
   }
   _terms() async {
-    final Uri _termsUrl = Uri.parse('https://www.salespower.io/agb');
+    final Uri _termsUrl = Uri.parse('https://www.sales_power.io/agb');
     if (!await launchUrl(_termsUrl)) {
       throw Exception('Could not launch $_termsUrl');
     }
   }
   _privacy() async {
-    final Uri _privacyUrl = Uri.parse('https://www.salespower.io/datenschutz');
+    final Uri _privacyUrl = Uri.parse('https://www.sales_power.io/datenschutz');
     if (!await launchUrl(_privacyUrl)) {
       throw Exception('Could not launch $_privacyUrl');
     }
