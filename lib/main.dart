@@ -19,7 +19,7 @@ class MyFirstApp extends StatelessWidget {
         '/main': (context) => const MainWidget(),
         '/auth': (context) => const AuthWidget(),
       },
-      initialRoute: '/main',
+      initialRoute: '/auth',
       theme: ThemeData(
         fontFamily: 'Roboto',
         primaryColor: AppColors.mainColor,
